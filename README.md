@@ -5,6 +5,16 @@ Sébastien Herbreteau and Charles Kervrann
 
 The repo supports python 3.8 + pytorch 1.8.1 + numpy 1.21.2 + skimage 0.18.1 + PIL 8.2.0.
 
+## Install
+
+To install in an environment using pip:
+
+```
+python -m venv .nlridge_env
+source .nlridge_env/bin/activate
+pip install /path/to/NL-Ridge
+```
+
 ## Datasets
 All the models are trained on BSD400 and tested on BSD68 and Set12. Simply modify the argument ``--in_folder`` for training on other datatets. Only one model is trained for all noise levels between 1 and 55.
 
