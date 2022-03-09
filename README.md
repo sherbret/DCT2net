@@ -10,9 +10,9 @@ The repo supports python 3.8 + pytorch 1.8.1 + numpy 1.21.2 + skimage 0.18.1 + P
 To install in an environment using pip:
 
 ```
-python -m venv .nlridge_env
-source .nlridge_env/bin/activate
-pip install /path/to/NL-Ridge
+python -m venv .dct2net_env
+source .dct2net_env/bin/activate
+pip install /path/to/DCT2net
 ```
 
 ## Datasets
