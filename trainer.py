@@ -34,7 +34,7 @@ parser.add_argument("--stride_training", type=int, dest="stride_training", defau
 
 # dataset
 parser.add_argument("--model_name", type=str, dest="model_name", help="The name of the model to be saved.", default="dct2net")
-parser.add_argument("--in_folder", type=str, dest="in_folder", help="Path to the folder containing the images for the training.", default="./datasets/BSD400")
+parser.add_argument("--in_folder", type=str, dest="in_folder", help="Path to the folder containing the images for the training.")
 parser.add_argument("--out_folder", type=str, dest="out_folder", help="Path to the folder where models are saved.", default="./saved_models")
 
 args = parser.parse_args()

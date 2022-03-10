@@ -3,7 +3,7 @@ Sébastien Herbreteau and Charles Kervrann
 
 ## Requirements
 
-The repo supports python 3.8 + pytorch 1.8.1 + numpy 1.21.2 + skimage 0.18.1 + PIL 8.2.0.
+The repo supports python 3.8 + pytorch 1.8.1 + numpy 1.21.2 + skimage 0.19.2 + PIL 8.2.0.
 
 ## Install
 
@@ -34,19 +34,19 @@ All the models are trained on BSD400 and tested on BSD68 and Set12. Simply modif
 
 To train a new model for gray denoising:
 ```
-python ./trainer.py --in_folder ./datasets/BSD400
+python ./trainer.py --in_folder /path/to/dataset
 ```
 
 ## Pretrained model
 
 To denoise an image with DCT2net (remove ``--add_noise`` if it is already noisy):
 ```
-python ./dct2net_denoiser.py --sigma 25 --add_noise --in ./datasets/Set12/08.png --out ./denoised_images/dct2net_sigma25.tif --model_name ./saved_models/dct2net.p
+python ./dct2net_denoiser.py --sigma 25 --add_noise --in ./test_images/102061.png --out ./denoised.tif --model_name ./saved_models/dct2net.p
 ```
 
 To denoise an image with DCT/DCT2net (remove ``--add_noise`` if it is already noisy):
 ```
-python ./dct-dct2net_denoiser.py --sigma 25 --add_noise --in ./datasets/Set12/08.png --out ./denoised_images/dct-dct2net_sigma25.tif --model_name ./saved_models/dct2net.p
+python ./dct-dct2net_denoiser.py --sigma 25 --add_noise --in ./test_images/102061.png --out ./denoised.tif --model_name ./saved_models/dct2net.p
 ```
 
 
