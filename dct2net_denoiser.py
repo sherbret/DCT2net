@@ -16,8 +16,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--model_name", type=str, dest="model_name", help="Path to the saved model.", default="./saved_models/dct2net.p")
 parser.add_argument("--patch_size", type=int, dest="patch_size", help="Patch size.", default=13)
 parser.add_argument("--sigma", type=float, dest="sigma", help="Standard deviation of the noise (noise level). Should be between 1 and 55.", default=25)
-parser.add_argument("--img_to_denoise", type=str, dest="img_to_denoise", help="Path to the image to denoise.", default="./datasets/Set12/08.png")
-parser.add_argument("--out_folder", type=str, dest="out_folder", help="Path to put the denoised image.", default="./denoised_images/dct2net_sigma25.tif")
+parser.add_argument("--in", type=str, dest="img_to_denoise", help="Path to the image to denoise.", default="./datasets/Set12/08.png")
+parser.add_argument("--out", type=str, dest="out_folder", help="Path to put the denoised image.", default="./denoised_images/dct2net_sigma25.tif")
 parser.add_argument("--add_noise", action='store_true', help="Add artificial Gaussian noise to the image.")
 args = parser.parse_args()
 
@@ -53,7 +53,7 @@ if args.add_noise:
 	print("PSNR:", round(-10*np.log10(np.mean((img_denoised - img)**2)), 2), "dB")
 
 # Saving
-im = Image.fromarray(img_denoised)
+im = Image.fromarray(img_denoised*255)
 im.save(args.out_folder)
 
 
