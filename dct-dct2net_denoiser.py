@@ -7,7 +7,7 @@
 import torch
 import torch.nn as nn
 import numpy as np
-from PIL import Image, ImageOps
+from PIL import Image
 import pickle
 import argparse
 from models.model_testing import *
