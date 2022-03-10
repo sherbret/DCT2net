@@ -41,12 +41,12 @@ python ./trainer.py --in_folder /path/to/dataset
 
 To denoise an image with DCT2net (remove ``--add_noise`` if it is already noisy):
 ```
-python ./dct2net_denoiser.py --sigma 25 --add_noise --in ./test_images/102061.png --out ./denoised.tif --model_name ./saved_models/dct2net.p
+python ./dct2net_denoiser.py --sigma 25 --add_noise --in ./test_images/102061.png --out ./denoised.png --model_name ./saved_models/dct2net.p
 ```
 
 To denoise an image with DCT/DCT2net (remove ``--add_noise`` if it is already noisy):
 ```
-python ./dct-dct2net_denoiser.py --sigma 25 --add_noise --in ./test_images/102061.png --out ./denoised.tif --model_name ./saved_models/dct2net.p
+python ./dct-dct2net_denoiser.py --sigma 25 --add_noise --in ./test_images/102061.png --out ./denoised.png --model_name ./saved_models/dct2net.p
 ```
 
 
