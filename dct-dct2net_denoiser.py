@@ -19,25 +19,22 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--model_name", type=str, dest="model_name", help="Path to the saved model.", default="./saved_models/dct2net.p")
 parser.add_argument("--patch_size", type=int, dest="patch_size", help="Patch size.", default=13)
 parser.add_argument("--sigma", type=float, dest="sigma", help="Standard deviation of the noise (noise level). Should be between 1 and 55.", default=25)
-parser.add_argument("--in", type=str, dest="img_to_denoise", help="Path to the image to denoise.", default="./datasets/Set12/08.png")
-parser.add_argument("--out", type=str, dest="out_folder", help="Path to put the denoised image.", default="./denoised_images/dct-dct2net_sigma25.tif")
+parser.add_argument("--in", type=str, dest="img_to_denoise", help="Path to the image to denoise.", default="./test_images/102061.png")
+parser.add_argument("--out", type=str, dest="out_folder", help="Path to put the denoised image.", default="./denoised.png")
 parser.add_argument("--add_noise", action='store_true', help="Add artificial Gaussian noise to the image.")
 args = parser.parse_args()
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 im = Image.open(args.img_to_denoise)
-im = ImageOps.grayscale(im)
-img = np.array(im) / 255.0
-
-np.random.seed(99)
+img = np.array(im) 
 
 if args.add_noise:
-	img_noisy = img + args.sigma / 255 * np.random.randn(*img.shape)
+	img_noisy = img + args.sigma * np.random.randn(*img.shape)
 else:
 	img_noisy = img
 
-img_noisy_torch = torch.from_numpy(img_noisy).view(1, 1, *img_noisy.shape).to(device).float()
+img_noisy_torch = torch.from_numpy(img_noisy).view(1, 1, *img_noisy.shape).to(device).float() / 255
 
 
 # Model
@@ -60,18 +57,18 @@ with torch.no_grad():
 
 	edges = feature.canny(img_denoised_torch1.view(*img_noisy.shape).cpu().numpy(), sigma=1)
 	
-	d = binary_dilation(edges, selem=np.ones((5,5)))
+	d = binary_dilation(edges, footprint=np.ones((5,5)))
 	d = torch.from_numpy(d).type(torch.int64).to(device)
 	img_denoised_torch = torch.gather(imgX2, dim=1, index=d.view(1, 1, *img_noisy.shape))
 	img_denoised = img_denoised_torch.view(*img_noisy.shape).cpu().numpy()
-	img_denoised = np.clip(img_denoised, 0, 1)
+	img_denoised = np.clip(img_denoised, 0, 1) * 255
 
 # Performance in PSNR
 if args.add_noise:
-	print("PSNR:", round(-10*np.log10(np.mean((img_denoised - img)**2)), 2), "dB")
+	print("PSNR:", round(10*np.log10(255**2 / np.mean((img_denoised - img)**2)), 2), "dB")
 
 # Saving
-im = Image.fromarray(img_denoised*255)
+im = Image.fromarray(np.round(img_denoised).astype(np.uint8))
 im.save(args.out_folder)
 
 
