@@ -1,4 +1,4 @@
-# DCT2net
+# DCT2net: An Interpretable Shallow CNN for Image Denoising (IEEE TIP'22)
 Sébastien Herbreteau and Charles Kervrann
 
 ## Requirements
@@ -56,3 +56,16 @@ This work was supported by Bpifrance agency (funding) through the LiChIE contrac
 
 We would like to thank R. Fraisse (Airbus) for fruitful  discussions. 
 
+## Citation
+```BibTex
+@ARTICLE{9799727,
+  author={Herbreteau, Sébastien and Kervrann, Charles},
+  journal={IEEE Transactions on Image Processing}, 
+  title={DCT2net: An Interpretable Shallow CNN for Image Denoising}, 
+  year={2022},
+  volume={31},
+  number={},
+  pages={4292-4305},
+  doi={10.1109/TIP.2022.3181488}
+}
+```
